@@ -1,0 +1,78 @@
+[project]
+name = "MatchTrace CV"
+seed = 42
+
+[paths]
+dataset = "artifacts/data/team_dataset.npz"
+demo_video = "artifacts/data/demo_match.mp4"
+demo_truth = "artifacts/data/demo_ground_truth.json"
+model = "artifacts/models/team_classifier.pt"
+evaluation = "artifacts/reports/evaluation.json"
+output_video = "outputs/analyzed_demo.mp4"
+run_summary = "outputs/run_summary.json"
+log = "logs/matchtrace.jsonl"
+
+[synthetic]
+image_size = 32
+train_samples = 600
+validation_samples = 160
+test_samples = 160
+video_width = 640
+video_height = 360
+video_frames = 120
+video_fps = 24.0
+players_per_team = 5
+
+[model]
+channels = 24
+batch_size = 64
+epochs = 6
+learning_rate = 0.003
+weight_decay = 0.0001
+num_workers = 0
+torch_threads = 2
+
+[detector]
+backend = "synthetic_color"
+confidence = 0.25
+model_path = ""
+
+[tracker]
+max_distance_pixels = 70.0
+max_age_frames = 10
+distance_weight = 0.7
+iou_weight = 0.3
+velocity_smoothing = 0.65
+
+[motion]
+enabled = true
+max_corners = 120
+quality_level = 0.01
+min_distance = 8
+
+[pitch]
+width_meters = 105.0
+height_meters = 68.0
+
+[analytics]
+possession_distance_meters = 7.0
+speed_window_frames = 5
+maximum_speed_mps = 12.0
+position_smoothing_alpha = 0.55
+maximum_jump_multiplier = 2.5
+possession_hold_frames = 4
+possession_switch_margin_meters = 0.75
+
+[render]
+codec = "mp4v"
+show_track_id = true
+show_speed = true
+show_distance = true
+
+[api]
+input_root = "artifacts/data"
+output_root = "outputs"
+
+[audit]
+hash_input = true
+hash_output = true

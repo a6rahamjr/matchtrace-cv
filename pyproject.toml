@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "matchtrace-cv"
+version = "3.0.0"
+description = "Streaming football video analytics with reproducible ML training."
+readme = "README.md"
+requires-python = ">=3.11"
+license = {file = "LICENSE"}
+authors = [{name = "MatchTrace CV contributors"}]
+dependencies = [
+    "numpy>=1.26,<3",
+    "opencv-python>=4.9,<5",
+    "torch>=2.1,<3",
+    "fastapi>=0.110,<1",
+    "uvicorn>=0.27,<1",
+    "pydantic>=2.6,<3",
+]
+
+[project.optional-dependencies]
+real-video = ["ultralytics>=8.2,<9"]
+dev = [
+    "httpx>=0.27,<1",
+    "ruff>=0.5,<1",
+]
+
+[project.scripts]
+matchtrace = "matchtrace.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+matchtrace = ["default.toml"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
