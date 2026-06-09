@@ -40,7 +40,7 @@ src/matchtrace/
 configs/           environment-neutral TOML configuration
 tests/             unit and end-to-end behavior tests
 app/               FastAPI application factory
-docs/              PRD, architecture, comparison, and guides
+docs/              PRD, architecture, and operational guides
 ```
 
 ## Extensibility
